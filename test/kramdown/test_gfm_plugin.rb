@@ -14,13 +14,21 @@ class Kramdown::TestGfmPlugin < Minitest::Test
       *More ~~Markdown~~ continues...*
 
       That's pretty ~~awesome~~.
+      Test lines
     MD
   end
 
   def test_correct_output
     doc = Kramdown::Document.new(@text, { input: :PluginsParser })
     html = doc.to_html
+
     assert_equal 2, html.scan("<del>").size
+    assert_equal 1, html.scan("</del>.\nTest").size
+
+    doc2 = Kramdown::Document.new(@text, { input: :PluginsParser, gfm_hard_line_breaks: true })
+    html2 = doc2.to_html
+
+    assert_equal 1, html2.scan("</del>.<br />\nTest").size
   end
 
   def test_gfm_code

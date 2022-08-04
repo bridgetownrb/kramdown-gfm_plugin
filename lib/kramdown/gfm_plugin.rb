@@ -26,5 +26,6 @@ module Kramdown
 end
 
 require_relative "kramdown_plugins/gfm/codeblock"
+require_relative "kramdown_plugins/gfm/line_breaks"
 require_relative "kramdown_plugins/gfm/strikethrough"
 require_relative "kramdown_plugins/gfm/quirks"
